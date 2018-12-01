@@ -1,0 +1,26 @@
+version: "2"
+
+networks:
+  centos_net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1
+        dns: 8.8.8.8
+        dns: 8.8.4.4
+
+services:
+  vmwaretools:
+    build:
+      context: ./vmwaretools
+    # image: vmwaretools:test
+    command: /usr/sbin/init
+    domainname: command.mil
+    hostname: vmwaretools
+    networks:
+      centos_net:
+        aliases:
+          - vmwaretools
+        ipv4_address: 172.16.238.10
+
