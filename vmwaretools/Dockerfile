@@ -7,16 +7,17 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 \
     && yum -y install epel-release \
     && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 \
     && yum -y install git python36-setuptools \
-    && easy_install-3.6 pip \
-    && mkdir -p /build \
-    && cd /build \
-    && git clone https://github.com/vmware/vsphere-automation-sdk-python.git \
-    && cd /build/vsphere-automation-sdk-python \
-    && pip install --upgrade \
-                   --force-reinstall \
-                   -r requirements.txt \
-                   --extra-index-url file:///build/vsphere-automation-sdk-python/lib
+    && easy_install-3.6 pip
 
+RUN mkdir -p /build \
+    && cd /build \
+    && git clone https://github.com/vmware/vsphere-automation-sdk-python.git
+    && pip3.6 install pyVmomi \
+    && pip3.6 install suds-jurko \
+    && cd /build/vsphere-automation-sdk-python \
+    && pip3.6 install /build/vsphere-automation-sdk-python/lib/*/*.whl \
+    && pip3.6 install -r /build/vsphere-automation-sdk-python/requirements.txt \
+    && pip3.6 install -r /build/vsphere-automation-sdk-python/test-requirements.txt
 
 # RUN useradd centos \
 #            --create-home \
