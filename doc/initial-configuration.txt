@@ -1,0 +1,19 @@
+# esxi apparently uses dhcp to set hostname and fqdn
+# in a non-dhcp environment, to set the hostname:
+browse to:
+
+https://ip.of.esxi.host
+
+1. Click
+    Networking
+2. Click
+    Default TCP/IP stack
+3. Click
+    Actions
+4. Click
+    Edit Settings
+5. Select
+    Manually confifure settings for this TCP/IP stack
+6. Set the desired configurations
+7. Click
+    Save
